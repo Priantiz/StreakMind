@@ -4,8 +4,8 @@ from datetime import timedelta
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
-from services.TarefaService import TarefaService
-from services.SessaoService import SessaoService
+from src.services.TarefaService import TarefaService
+from src.services.SessaoService import SessaoService
 
 
 class StreakServiceFake:

@@ -4,8 +4,8 @@ from datetime import datetime, timedelta
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
-from models.configuracao import Configuracao
-from services.StreakService import StreakService
+from src.models.configuracao import Configuracao
+from src.services.StreakService import StreakService
 
 
 class DashboardFake:
