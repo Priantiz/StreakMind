@@ -5,8 +5,6 @@ import pytest
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
 from src.services.TarefaService import TarefaService
-from src.models.tarefa import Tarefa
-
 
 def test_adicionar_tarefa_valida():
     tarefa_service = TarefaService()
