@@ -1,0 +1,48 @@
+{
+    "tarefas": [
+        {
+            "nome": "python"
+        }
+    ],
+    "sessoes": [
+        {
+            "tarefa": {
+                "nome": "python"
+            },
+            "data": "2026-04-11",
+            "tempo": 0
+        },
+        {
+            "tarefa": {
+                "nome": "python"
+            },
+            "data": "2026-04-11",
+            "tempo": 1
+        },
+        {
+            "tarefa": {
+                "nome": "python"
+            },
+            "data": "2026-04-11",
+            "tempo": 31
+        }
+    ],
+    "configuracao": {
+        "meta_diaria": 30,
+        "dias_obrigatorios": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+        ]
+    },
+    "streak": {
+        "streak_atual": 1,
+        "dia_ja_validado": true,
+        "data_ultimo_dia": "2026-04-11",
+        "cumpriu_meta_no_dia": true
+    }
+}
