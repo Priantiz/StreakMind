@@ -1,5 +1,7 @@
 # StreakMind
+
 Versão: 1.0.0
+
 ## Descrição
 
 O StreakMind é uma aplicação desktop em Python com interface gráfica que ajuda estudantes a manterem consistência nos estudos por meio de registro de sessões, acompanhamento do tempo estudado no dia e sistema de streak baseado em metas mínimas.
@@ -32,7 +34,7 @@ Estudantes que desejam:
 - acompanhar constância ao longo dos dias
 - organizar sessões de estudo por tarefa ou de forma livre
 
-## Funcionalidades principais do sistema
+## Funcionalidades principais
 
 - dashboard com resumo do dia
 - exibição da streak atual
@@ -49,9 +51,9 @@ Estudantes que desejam:
 
 ## Regras principais do sistema
 
-- a streak só conta em dias obrigatórios(definidos pelo usuario)
+- a streak só conta em dias obrigatórios (definidos pelo usuário)
 - o usuário deve definir pelo menos 1 dia obrigatório por semana
-- o usuário deve definir pelo menos 20 minutos obrigatórios por cada dia obrigatório
+- a meta diária deve ser de pelo menos 20 minutos
 - a streak só aumenta quando o tempo total do dia atinge a meta diária
 - dias não obrigatórios não quebram a streak
 - apenas uma sessão pode ficar ativa por vez
@@ -66,10 +68,27 @@ Estudantes que desejam:
 - Pytest
 - Ruff
 - GitHub Actions
-## Como executar o projeto
 
-Após instalar as dependências, execute o arquivo principal da aplicação:
+## Instruções de instalação
 
-### Windows
+```bat
+python -m venv venv
+venv\Scripts\activate
+python -m pip install -r requirements.txt
+```
+
+## Instrução de execução
+
 ```bat
 python src/main.py
+```
+
+## Instruções para rodar os testes
+```bat
+python -m pytest tests
+```
+
+## Instrução para rodar o lint
+```bat
+python -m ruff check src tests
+```
