@@ -4,6 +4,7 @@ from services.SessaoService import SessaoService
 from services.DashboardService import DashboardService
 from services.StreakService import StreakService
 from services.ConfiguracaoService import ConfiguracaoService
+from ui.app_window import AppWindow
 
 
 def main():
@@ -52,19 +53,15 @@ def main():
     tarefa_service.sessao_service = sessao_service
     tarefa_service.streak_service = streak_service
 
-    print('Sistema iniciado com sucesso.')
-    print(f'Tarefas carregadas: {len(tarefa_service.lista_tarefas)}')
-    print(f'Sessões carregadas: {len(sessao_service.lista_sessoes)}')
-    print(f'Streak atual: {streak_service.streak_atual}')
+    janela = AppWindow(
+        tarefa_service=tarefa_service,
+        sessao_service=sessao_service,
+        dashboard_service=dashboard_service,
+        streak_service=streak_service,
+        configuracao_service=configuracao_service
+    )
 
-    return {
-        'repositorio': repositorio,
-        'tarefa_service': tarefa_service,
-        'sessao_service': sessao_service,
-        'dashboard_service': dashboard_service,
-        'streak_service': streak_service,
-        'configuracao_service': configuracao_service
-    }
+    janela.iniciar()
 
 
 if __name__ == '__main__':

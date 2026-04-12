@@ -1,4 +1,4 @@
-dados.json
+src/dados.json
 venv/
 __pycache__/
 *.pyc

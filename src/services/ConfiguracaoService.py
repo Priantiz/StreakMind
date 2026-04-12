@@ -35,7 +35,8 @@ class ConfiguracaoService:
     def definir_dias_obrigatorios(self, dias_obrigatorios):
         if not isinstance(dias_obrigatorios, list):
             raise TypeError('os dias obrigatorios devem ser uma lista')
-        
+        if len(dias_obrigatorios) == 0:
+            raise ValueError('deve existir pelo menos um dia obrigatorio')
         for dia in dias_obrigatorios:
             if not isinstance(dia, int):
                 raise TypeError('cada dia obrigatorio deve ser um inteiro')
