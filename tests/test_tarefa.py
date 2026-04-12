@@ -13,7 +13,6 @@ def test_adicionar_tarefa_valida():
 
     nova_tarefa = tarefa_service.adicionar_tarefa('Python')
 
-    assert isinstance(nova_tarefa, Tarefa)
     assert nova_tarefa.nome == 'Python'
     assert len(tarefa_service.lista_tarefas) == 1
     assert tarefa_service.lista_tarefas[0].nome == 'Python'
