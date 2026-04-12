@@ -1,4 +1,5 @@
 # StreakMind
+Versão: 1.0.0
 ## Descrição
 
 O StreakMind é uma aplicação desktop em Python com interface gráfica que ajuda estudantes a manterem consistência nos estudos por meio de registro de sessões, acompanhamento do tempo estudado no dia e sistema de streak baseado em metas mínimas.
@@ -65,3 +66,10 @@ Estudantes que desejam:
 - Pytest
 - Ruff
 - GitHub Actions
+## Como executar o projeto
+
+Após instalar as dependências, execute o arquivo principal da aplicação:
+
+### Windows
+```bat
+python src/main.py
