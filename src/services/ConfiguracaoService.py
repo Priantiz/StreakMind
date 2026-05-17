@@ -48,3 +48,10 @@ class ConfiguracaoService:
         
         self.configuracao.dias_obrigatorios = dias_obrigatorios.copy()
         self.salvar_dados()
+
+    def definir_estudar_em_feriados(self, estudar_em_feriados):
+        if not isinstance(estudar_em_feriados, bool):
+            raise TypeError('estudar_em_feriados deve ser True ou False')
+        
+        self.configuracao.estudar_em_feriados = estudar_em_feriados
+        self.salvar_dados()

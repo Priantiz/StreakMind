@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 
+
 class StreakService:
     def __init__(
         self,
@@ -8,15 +9,16 @@ class StreakService:
         streak_atual=0,
         dia_ja_validado=False,
         data_ultimo_dia=None,
-        cumpriu_meta_no_dia=False
+        cumpriu_meta_no_dia=False,
+        feriado_service=None
     ):
-        if not isinstance(streak_atual,int):
+        if not isinstance(streak_atual, int):
             raise TypeError('a streak deve ser um numero inteiro')
-        if streak_atual <0:
+        if streak_atual < 0:
             raise ValueError('a streak deve ser um numero positivo')
-        if not isinstance(dia_ja_validado,bool):
+        if not isinstance(dia_ja_validado, bool):
             raise TypeError('o dia_ja_validado so pode ser ou True ou False')
-        if not isinstance(cumpriu_meta_no_dia,bool):
+        if not isinstance(cumpriu_meta_no_dia, bool):
             raise TypeError('o cumpriu_meta_no_dia so pode ser True ou False')
         if not isinstance(data_ultimo_dia, (type(None), str)):
             raise TypeError('a data_ultimo_dia so pode ser None ou uma data string')
@@ -25,12 +27,28 @@ class StreakService:
                 datetime.strptime(data_ultimo_dia, "%Y-%m-%d")
             except ValueError:
                 raise ValueError("a data_ultimo_dia deve estar no formato YYYY-MM-DD")
+
         self.streak_atual = streak_atual
         self.configuracao = configuracao
         self.dia_ja_validado = dia_ja_validado
         self.data_ultimo_dia = datetime.now().strftime("%Y-%m-%d") if data_ultimo_dia is None else data_ultimo_dia
         self.cumpriu_meta_no_dia = cumpriu_meta_no_dia
         self.dashboard_service = dashboard_service
+        self.feriado_service = feriado_service
+
+    def dia_deve_ser_obrigatorio(self, data):
+        dia_da_semana = data.weekday()
+
+        if dia_da_semana not in self.configuracao.dias_obrigatorios:
+            return False
+
+        if self.configuracao.estudar_em_feriados is False and self.feriado_service is not None:
+            dados_feriado = self.feriado_service.verificar_feriado(data)
+
+            if dados_feriado["feriado"] is True:
+                return False
+
+        return True
 
     def atualizar_streak(self):
         data_de_hoje = datetime.now().strftime("%Y-%m-%d")
@@ -39,9 +57,7 @@ class StreakService:
             data_anterior = datetime.strptime(self.data_ultimo_dia, "%Y-%m-%d")
             data_hoje_obj = datetime.strptime(data_de_hoje, "%Y-%m-%d")
 
-            dia_da_semana_anterior = data_anterior.weekday()
-
-            if dia_da_semana_anterior in self.configuracao.dias_obrigatorios:
+            if self.dia_deve_ser_obrigatorio(data_anterior):
                 if self.cumpriu_meta_no_dia is False:
                     self.streak_atual = 0
 
@@ -49,9 +65,8 @@ class StreakService:
 
             for i in range(1, diferenca):
                 dia_intermediario = data_anterior + timedelta(days=i)
-                dia_da_semana = dia_intermediario.weekday()
 
-                if dia_da_semana in self.configuracao.dias_obrigatorios:
+                if self.dia_deve_ser_obrigatorio(dia_intermediario):
                     self.streak_atual = 0
                     break
 
@@ -59,10 +74,10 @@ class StreakService:
             self.cumpriu_meta_no_dia = False
             self.data_ultimo_dia = data_de_hoje
 
-        dia_da_semana_hoje = datetime.now().weekday()
+        data_hoje_obj = datetime.now()
 
         if self.dia_ja_validado is False:
-            if dia_da_semana_hoje in self.configuracao.dias_obrigatorios:
+            if self.dia_deve_ser_obrigatorio(data_hoje_obj):
                 if self.dashboard_service.calcular_tempo_total() >= self.configuracao.meta_diaria:
                     self.streak_atual += 1
                     self.dia_ja_validado = True
@@ -74,4 +89,4 @@ class StreakService:
             'dia_ja_validado': self.dia_ja_validado,
             'data_ultimo_dia': self.data_ultimo_dia,
             'cumpriu_meta_no_dia': self.cumpriu_meta_no_dia
-    }
+        }
