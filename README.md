@@ -2,6 +2,8 @@
 
 Versão: 1.0.0
 
+Link da aplicação publicada: https://priantiz.github.io/StreakMind/
+
 ## Descrição
 
 O StreakMind é uma aplicação desktop em Python com interface gráfica que ajuda estudantes a manterem consistência nos estudos por meio de registro de sessões, acompanhamento do tempo estudado no dia e sistema de streak baseado em metas mínimas.
@@ -48,7 +50,9 @@ Estudantes que desejam:
 - configuração de meta diária
 - configuração de dias obrigatórios
 - persistência de dados em JSON
-
+- exibição no dashboard se o dia atual é feriado
+- configuração para exigir ou não estudo em feriados
+  
 ## Regras principais do sistema
 
 - a streak só conta em dias obrigatórios (definidos pelo usuário)
@@ -59,7 +63,9 @@ Estudantes que desejam:
 - apenas uma sessão pode ficar ativa por vez
 - tarefas são opcionais
 - sessões livres são permitidas
-
+- feriados nacionais podem ser considerados ou ignorados como dias obrigatórios, conforme configuração do usuário
+- se a opção "Exigir estudo em feriados" estiver desativada, feriados não quebram a streak
+  
 ## Tecnologias utilizadas
 
 - Python 3
@@ -68,6 +74,22 @@ Estudantes que desejam:
 - Pytest
 - Ruff
 - GitHub Actions
+- Requests
+- BrasilAPI
+
+## Integração com API pública
+
+O StreakMind utiliza a BrasilAPI para consultar feriados nacionais.
+
+A integração permite verificar se a data atual é um feriado nacional e usar essa informação na lógica da streak e no dashboard da aplicação.
+
+O usuário pode configurar se deseja exigir estudo em feriados. Caso essa opção esteja desativada, feriados nacionais não são considerados dias obrigatórios e não quebram a streak.
+
+Endpoint utilizado:
+
+```text
+https://brasilapi.com.br/api/feriados/v1/{ano}
+```
 
 ## Instruções de instalação
 
