@@ -1,12 +1,14 @@
 from tkinter import ttk
 from datetime import datetime
 
+
 class DashboardTab:
-    def __init__(self, parent, dashboard_service, streak_service, configuracao_service):
+    def __init__(self, parent, dashboard_service, streak_service, configuracao_service, feriado_service):
         self.parent = parent
         self.dashboard_service = dashboard_service
         self.streak_service = streak_service
         self.configuracao_service = configuracao_service
+        self.feriado_service = feriado_service
 
         self.frame = ttk.Frame(self.parent)
 
@@ -33,6 +35,9 @@ class DashboardTab:
         self.status_label = ttk.Label(self.frame, text='')
         self.status_label.pack(pady=5)
 
+        self.feriado_label = ttk.Label(self.frame, text='')
+        self.feriado_label.pack(pady=5)
+
         self.resumo_titulo_label = ttk.Label(
             self.frame,
             text='Resumo por tarefa do dia:'
@@ -54,10 +59,19 @@ class DashboardTab:
 
         dia_da_semana_hoje = datetime.now().weekday()
         dias_obrigatorios = self.configuracao_service.configuracao.dias_obrigatorios
-        if dia_da_semana_hoje not in dias_obrigatorios:
+        dados_feriado = self.feriado_service.verificar_feriado(datetime.now())
+        estudar_em_feriados = self.configuracao_service.configuracao.estudar_em_feriados
+
+        if dados_feriado["feriado"]:
+            self.feriado_label.config(text=f'Feriado hoje: {dados_feriado["nome"]}')
+        else:
+            self.feriado_label.config(text='Feriado hoje: não')
+
+        if dados_feriado["feriado"] and estudar_em_feriados is False:
+            self.status_label.config(text='Status: feriado não obrigatório')
+        elif dia_da_semana_hoje not in dias_obrigatorios:
             self.status_label.config(text='Status: hoje não é um dia obrigatório')
         else:
-
             if tempo_total >= meta:
                 self.status_label.config(text='Status do dia: meta atingida')
             else:
@@ -71,4 +85,4 @@ class DashboardTab:
             for nome_tarefa, tempo in tempo_por_tarefa.items():
                 linhas.append(f'{nome_tarefa}: {tempo} min')
 
-            self.resumo_label.config(text='\n'.join(linhas))  
+            self.resumo_label.config(text='\n'.join(linhas))
