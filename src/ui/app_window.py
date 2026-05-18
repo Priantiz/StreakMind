@@ -13,13 +13,15 @@ class AppWindow:
         sessao_service,
         dashboard_service,
         streak_service,
-        configuracao_service
+        configuracao_service,
+        feriado_service
     ):
         self.tarefa_service = tarefa_service
         self.sessao_service = sessao_service
         self.dashboard_service = dashboard_service
         self.streak_service = streak_service
         self.configuracao_service = configuracao_service
+        self.feriado_service = feriado_service
 
         self.root = tk.Tk()
         self.root.title('StudyFlow')
@@ -36,7 +38,8 @@ class AppWindow:
             self.notebook,
             self.dashboard_service,
             self.streak_service,
-            self.configuracao_service
+            self.configuracao_service,
+            self.feriado_service
         )
 
         self.sessao_tab = SessaoTab(

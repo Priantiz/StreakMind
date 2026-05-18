@@ -11,6 +11,7 @@ class ConfiguracoesTab:
         self.frame = ttk.Frame(self.parent)
 
         self.vars_dias = {}
+        self.var_estudar_em_feriados = tk.BooleanVar()
         self.criar_widgets()
         self.carregar_valores_atuais()
 
@@ -65,6 +66,13 @@ class ConfiguracoesTab:
             )
             check.grid(row=linha, column=coluna, padx=5, pady=5, sticky='w')
 
+        self.feriados_check = ttk.Checkbutton(
+            self.frame,
+            text='Exigir estudo em feriados',
+            variable=self.var_estudar_em_feriados
+        )
+        self.feriados_check.pack(pady=(15, 5))
+
         self.salvar_button = ttk.Button(
             self.frame,
             text='Salvar configurações',
@@ -81,6 +89,8 @@ class ConfiguracoesTab:
         for dia, var in self.vars_dias.items():
             var.set(dia in configuracao.dias_obrigatorios)
 
+        self.var_estudar_em_feriados.set(configuracao.estudar_em_feriados)
+
     def salvar_configuracoes(self):
         try:
             nova_meta = int(self.meta_entry.get().strip())
@@ -92,6 +102,9 @@ class ConfiguracoesTab:
 
             self.configuracao_service.definir_meta_diaria(nova_meta)
             self.configuracao_service.definir_dias_obrigatorios(dias_obrigatorios)
+            self.configuracao_service.definir_estudar_em_feriados(
+                self.var_estudar_em_feriados.get()
+            )
 
             if self.dashboard_tab is not None:
                 self.dashboard_tab.atualizar_dashboard()

@@ -4,6 +4,7 @@ from services.SessaoService import SessaoService
 from services.DashboardService import DashboardService
 from services.StreakService import StreakService
 from services.ConfiguracaoService import ConfiguracaoService
+from services.FeriadoService import FeriadoService
 from ui.app_window import AppWindow
 
 
@@ -32,13 +33,17 @@ def main():
 
     dashboard_service = DashboardService(sessao_service)
 
+    feriado_service = FeriadoService()
+
     streak_service = StreakService(
         configuracao=configuracao,
         dashboard_service=dashboard_service,
         streak_atual=streak_dict.get('streak_atual', 0),
         dia_ja_validado=streak_dict.get('dia_ja_validado', False),
         data_ultimo_dia=streak_dict.get('data_ultimo_dia', None),
-        cumpriu_meta_no_dia=streak_dict.get('cumpriu_meta_no_dia', False)
+        cumpriu_meta_no_dia=streak_dict.get('cumpriu_meta_no_dia', False),
+        feriado_service=feriado_service
+
     )
 
     configuracao_service = ConfiguracaoService(
@@ -58,7 +63,8 @@ def main():
         sessao_service=sessao_service,
         dashboard_service=dashboard_service,
         streak_service=streak_service,
-        configuracao_service=configuracao_service
+        configuracao_service=configuracao_service,
+        feriado_service=feriado_service
     )
 
     janela.iniciar()
