@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreakMind</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fb;
+            color: #1f2937;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #2563eb;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background-color: white;
+            margin-bottom: 20px;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #2563eb;
+        }
+
+        ul {
+            line-height: 1.8;
+        }
+
+        code {
+            background-color: #e5e7eb;
+            padding: 3px 6px;
+            border-radius: 4px;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>StreakMind</h1>
+        <p>Aplicação desktop para acompanhamento de estudos, metas diárias e streak.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Sobre o projeto</h2>
+            <p>
+                O StreakMind é uma aplicação desktop desenvolvida em Python com Tkinter.
+                O objetivo do sistema é ajudar estudantes a manterem consistência nos estudos,
+                registrando sessões, calculando tempo estudado no dia e acompanhando uma streak
+                baseada em metas diárias.
+            </p>
+        </section>
+
+        <section>
+            <h2>Funcionalidades</h2>
+            <ul>
+                <li>Dashboard com resumo do dia</li>
+                <li>Registro de sessões de estudo</li>
+                <li>Criação e remoção de tarefas</li>
+                <li>Controle de meta diária</li>
+                <li>Configuração de dias obrigatórios</li>
+                <li>Sistema de streak</li>
+                <li>Persistência de dados em JSON</li>
+                <li>Consulta de feriados nacionais usando API pública</li>
+                <li>Configuração para exigir ou não estudo em feriados</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Integração com API pública</h2>
+            <p>
+                O projeto utiliza a BrasilAPI para consultar feriados nacionais.
+                Essa informação é usada para adaptar a lógica da streak, permitindo que o usuário
+                escolha se feriados devem ou não contar como dias obrigatórios de estudo.
+            </p>
+            <p>
+                Endpoint utilizado:
+                <code>https://brasilapi.com.br/api/feriados/v1/{ano}</code>
+            </p>
+        </section>
+
+        <section>
+            <h2>Como executar</h2>
+            <p>Clone o repositório, crie o ambiente virtual e instale as dependências:</p>
+            <pre><code>python -m venv venv
+venv\Scripts\activate
+python -m pip install -r requirements.txt
+python src/main.py</code></pre>
+        </section>
+
+        <section>
+            <h2>Repositório</h2>
+            <p>
+                Acesse o código-fonte do projeto no GitHub:
+            </p>
+            <a class="button" href="https://github.com/Priantiz/StreakMind" target="_blank">
+                Ver repositório
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <p>StreakMind - Bootcamp Etapa Intermediária</p>
+    </footer>
+</body>
+</html>
