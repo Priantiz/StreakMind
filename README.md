@@ -1,6 +1,6 @@
 # StreakMind
 
-Versão: 1.0.0
+Versão: 1.1.0
 
 Link da aplicação publicada: https://priantiz.github.io/StreakMind/
 
