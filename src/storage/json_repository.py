@@ -1,5 +1,6 @@
 import json
 import os
+from pathlib import Path
 
 from models.tarefa import Tarefa
 from models.sessao import Sessao
@@ -7,9 +8,14 @@ from models.configuracao import Configuracao
 
 
 class JsonRepository:
-    def __init__(self, caminho_arquivo='dados.json'):
-        self.caminho_arquivo = caminho_arquivo
+    def __init__(self, caminho_arquivo=None):
+        if caminho_arquivo is None:
+            pasta_dados = Path(os.getenv('APPDATA')) / 'StreakMind'
+            pasta_dados.mkdir(parents=True, exist_ok=True)
 
+            self.caminho_arquivo = pasta_dados / 'dados.json'
+        else:
+            self.caminho_arquivo = caminho_arquivo
     def criar_arquivo_se_nao_existir(self):
         if not os.path.exists(self.caminho_arquivo):
             dados_iniciais = {
